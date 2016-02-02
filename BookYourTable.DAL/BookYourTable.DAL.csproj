@@ -49,6 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\TryHandlerDAL.cs" />
+    <Compile Include="Models\Friendship.cs" />
+    <Compile Include="Models\Guest.cs" />
+    <Compile Include="Models\Invitation.cs" />
+    <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\RestaurantManager.cs" />
+    <Compile Include="Models\SystemManager.cs" />
+    <Compile Include="Models\Table.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BookYourTableDBContext.cs" />
   </ItemGroup>
@@ -56,10 +67,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
