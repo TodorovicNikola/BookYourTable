@@ -27,7 +27,7 @@ namespace BookYourTable.DAL.Models
         public float Price { get; set; }
         
         [StringLength(128)]
-        public String imgUrl { get; set; }
+        public String ImgUrl { get; set; }
 
         [ForeignKey("RestaurantID")]
         public virtual Restaurant Restaurant { get; set; }

@@ -26,5 +26,7 @@ namespace BookYourTable.DAL.Models
 
         [StringLength(32)]
         public String LastName { get; set; }
+
+        public bool ConfirmedRegistration { get; set; }
     }
 }

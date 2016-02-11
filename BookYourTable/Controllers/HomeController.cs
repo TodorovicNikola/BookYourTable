@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BookYourTable.BLL.Handlers;
+using BookYourTable.Models;
 
 namespace BookYourTable.Controllers
 {
@@ -11,21 +12,10 @@ namespace BookYourTable.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-            TryHandler th = new TryHandler();
-            th.hasam();
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            if(Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
 
             return View();
         }

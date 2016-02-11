@@ -9,8 +9,11 @@ namespace BookYourTable.DAL.Models
 {
     public class Guest : User
     {
+        [StringLength(256)]
+        public String Address { get; set; }
+
         [StringLength(128)]
-        public String imgUrl { get; set; }
+        public String ImgUrl { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; }
         public virtual ICollection<Invitation> Invitations { get; set; }

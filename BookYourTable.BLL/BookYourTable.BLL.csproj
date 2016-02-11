@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,12 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlers\TryHandler.cs" />
+    <Compile Include="Handlers\LoginHandlerBLL.cs" />
+    <Compile Include="Handlers\RegisterHandlerBLL.cs" />
+    <Compile Include="Models\Friendship.cs" />
+    <Compile Include="Models\InvitationBLL.cs" />
+    <Compile Include="Models\MenuItemBLL.cs" />
+    <Compile Include="Models\ReservationBLL.cs" />
+    <Compile Include="Models\RestaurantBLL.cs" />
+    <Compile Include="Models\TableBLL.cs" />
+    <Compile Include="Models\UserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BookYourTable.DAL\BookYourTable.DAL.csproj">
       <Project>{ae167342-c3d0-4482-abd8-739f3c735bf8}</Project>

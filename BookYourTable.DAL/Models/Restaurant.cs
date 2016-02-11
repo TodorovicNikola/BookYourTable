@@ -13,14 +13,18 @@ namespace BookYourTable.DAL.Models
 
         [StringLength(128)]
         [Required]
-        public String name { get; set; }
+        public String Name { get; set; }
 
         [Required]
         [StringLength(1024)]
-        public String description { get; set; }
+        public String Description { get; set; }
 
         [StringLength(128)]
-        public String imgUrl { get; set; }
+        public String ImgUrl { get; set; }
+
+        [Required]
+        [StringLength(256)]
+        public String Address { get; set; }
         
         public virtual ICollection<RestaurantManager> RestaurantManagers { get; set; }
         public virtual ICollection<MenuItem> MenuItems { get; set; }
