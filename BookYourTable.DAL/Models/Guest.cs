@@ -15,6 +15,8 @@ namespace BookYourTable.DAL.Models
         [StringLength(128)]
         public String ImgUrl { get; set; }
 
+        public bool ConfirmedRegistration { get; set; }
+
         public virtual ICollection<Reservation> Reservations { get; set; }
         public virtual ICollection<Invitation> Invitations { get; set; }
         public virtual ICollection<Friendship> SentFriendshipRequests { get; set; }

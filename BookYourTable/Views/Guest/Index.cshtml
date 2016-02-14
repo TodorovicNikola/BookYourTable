@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BookYourTable.BLL.Models.UserBLL>
+@using BookYourTable.BLL.Models;
+
+@{
+    ViewBag.Title = "Registered Guests";
+}
+
+@{UserBLL user = (UserBLL)Session["user"];}
+
+<h2>Registered Guests</h2>
+
+<div style="clear:both"></div>
+
+<form class="form-inline" style="position :relative; top: -47px; float:right;" action="#" method="post">
+    <fieldset>
+        <div class="form-group">
+            <input type="search" name="inputSearch" class="form-control" id="inputSearch" placeholder="Search..." style="margin-bottom:20px; width:200px" />
+            <input type="image" id="search-button" src="~/Content/Images/search_button.png" alt="Submit" width="30" height="30" style="position: relative; top: 0px">
+        </div>
+    </fieldset>
+</form>
+
+<div style="clear:both"></div>
+
+<div class="guests" style="position:relative; top: -40px">
+    <div></div>
+    @foreach (var item in Model)
+    {
+        if (!user.E_Mail.Equals(item.E_Mail))
+        {
+            <div class="guest" id="@item.UserID">
+                <div class="guest-left">
+                    <a href="@Url.Action("../Guest/Single", new { userID = item.UserID })">
+                        <img class="image" src="~/Content/Images/guest_default.png" />
+                    </a>
+                </div>
+                <div class="guest-right">
+                    <h3 style="text-transform: uppercase;">@Html.ActionLink(item.FirstName + " " + item.LastName, "../Guest/Single", new { userID = item.UserID })</h3>
+                    <p style="position:relative; top:60px">E-Mail: @item.E_Mail</p>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div style="clear: both"></div>

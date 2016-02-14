@@ -31,6 +31,8 @@ namespace BookYourTable.DAL
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            modelBuilder.Entity<MenuItem>().Property(x => x.Price).HasPrecision(6, 2);
         }
 
     }

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using BookYourTable.BLL.Handlers;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using BookYourTable.BLL.Models;
 
 namespace BookYourTable.Controllers
 {
@@ -84,6 +85,72 @@ namespace BookYourTable.Controllers
         public ActionResult ConfirmationSucceeded()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult RegisterRestaurant()
+        {
+            return View(new Restaurant());
+        }
+
+        [HttpPost]
+        public ActionResult RegisterRestaurant(Restaurant restaurant)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(restaurant);
+            }
+
+            _registerHandlerBLL.RegisterRestaurant(restaurant.Name, restaurant.Description, restaurant.Address);
+
+            TempData["Visibility"] = "visible";
+            TempData["Message"] = "Successfully Added New Restaurant!";
+            return RedirectToAction("Index", "Restaurant");
+        }
+
+        [HttpGet]
+        public ActionResult RegisterRestaurantManager(int restaurantID)
+        {
+            UserBLL user = (UserBLL)Session["user"];
+
+            if (user != null && user.Discriminator.Equals("SystemManager"))
+            {
+                ViewData["RestaurantID"] = restaurantID;
+                return View(new User());
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult RegisterRestaurantManager(User user)
+        {
+            if (user.Password != null && user.ConfirmPassword != null)
+            {
+                if (!user.Password.Equals(user.ConfirmPassword))
+                {
+                    ModelState.AddModelError("ConfirmPassword", "Password and Confirm Password do not match!");
+                }
+            }
+
+            if (user.E_Mail != null)
+            {
+                if (_registerHandlerBLL.E_MailExists(user.E_Mail))
+                {
+                    ModelState.AddModelError("E_Mail", "E-Mail already exists!");
+                }
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewData["RestaurantID"] = user.RestaurantID;
+                return View(user);
+            }
+
+            _registerHandlerBLL.RegisterRestaurantManager(user.E_Mail, user.Password, user.FirstName, user.LastName, user.RestaurantID);
+            TempData["Visibility"] = "visible";
+            TempData["Message"] = "Successfully Added New Manager!";
+            return RedirectToAction("Index", "Restaurant");
         }
     }
 }

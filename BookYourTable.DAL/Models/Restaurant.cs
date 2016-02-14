@@ -16,7 +16,7 @@ namespace BookYourTable.DAL.Models
         public String Name { get; set; }
 
         [Required]
-        [StringLength(1024)]
+        [StringLength(256)]
         public String Description { get; set; }
 
         [StringLength(128)]
@@ -25,6 +25,12 @@ namespace BookYourTable.DAL.Models
         [Required]
         [StringLength(256)]
         public String Address { get; set; }
+
+        [Required]
+        public bool TablesConfigured { get; set; }
+
+        public int? TablesMatrixWidth { get; set; }
+        public int? TablesMatrixHeight { get; set; }
         
         public virtual ICollection<RestaurantManager> RestaurantManagers { get; set; }
         public virtual ICollection<MenuItem> MenuItems { get; set; }

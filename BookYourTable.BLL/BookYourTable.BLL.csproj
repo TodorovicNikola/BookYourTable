@@ -42,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\GuestHandlerBLL.cs" />
     <Compile Include="Handlers\LoginHandlerBLL.cs" />
+    <Compile Include="Handlers\MenuItemHandlerBLL.cs" />
     <Compile Include="Handlers\RegisterHandlerBLL.cs" />
+    <Compile Include="Handlers\RestaurantHandlerBLL.cs" />
     <Compile Include="Models\Friendship.cs" />
     <Compile Include="Models\InvitationBLL.cs" />
     <Compile Include="Models\MenuItemBLL.cs" />

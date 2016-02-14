@@ -1,13 +1,12 @@
-﻿using BookYourTable.DAL.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookYourTable.BLL.Models
+namespace BookYourTable.DAL.Models
 {
-    public class UserBLL
+    public class UserDBReplica
     {
         public int UserID { get; set; }
         public String E_Mail { get; set; }
@@ -19,7 +18,7 @@ namespace BookYourTable.BLL.Models
         public int? RestaurantID { get; set; }
         public String Discriminator { get; set; }
 
-        public UserBLL(Guest guest)
+        public UserDBReplica(Guest guest)
         {
             UserID = guest.UserID;
             E_Mail = guest.E_Mail;
@@ -31,7 +30,7 @@ namespace BookYourTable.BLL.Models
             Discriminator = typeof(Guest).Name;
         }
 
-        public UserBLL(SystemManager systemManager)
+        public UserDBReplica(SystemManager systemManager)
         {
             UserID = systemManager.UserID;
             E_Mail = systemManager.E_Mail;
@@ -41,7 +40,7 @@ namespace BookYourTable.BLL.Models
             Discriminator = typeof(SystemManager).Name;
         }
 
-        public UserBLL(RestaurantManager restaurantManager)
+        public UserDBReplica(RestaurantManager restaurantManager)
         {
             UserID = restaurantManager.UserID;
             E_Mail = restaurantManager.E_Mail;
@@ -50,19 +49,6 @@ namespace BookYourTable.BLL.Models
             LastName = restaurantManager.LastName;
             RestaurantID = restaurantManager.RestaurantID;
             Discriminator = typeof(RestaurantManager).Name;
-        }
-
-        public UserBLL(UserDBReplica user)
-        {
-            UserID = user.UserID;
-            E_Mail = user.E_Mail;
-            Password = user.Password;
-            FirstName = user.FirstName;
-            LastName = user.LastName;
-            Address = user.Address;
-            ImgUrl = user.ImgUrl;
-            RestaurantID = user.RestaurantID;
-            Discriminator = user.Discriminator;
         }
     }
 }

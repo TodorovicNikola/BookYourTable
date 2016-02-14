@@ -1,0 +1,34 @@
+﻿@model BookYourTable.BLL.Models.RestaurantBLL
+@using BookYourTable.BLL.Models;
+
+@{
+    ViewBag.Title = Model.Name;
+    UserBLL user = (UserBLL)Session["user"];
+}
+<head>
+    <script src="~/Scripts/TablesGrid.js"></script>
+</head>
+<h2 style="text-transform: uppercase;" >@Model.Name</h2>
+
+<input type="hidden" value="@Model.RestaurantID" id="restaurantID" />
+
+<img src="~/Content/Images/restaurant_default.jpg" alt="Poster" style="margin-left:20px ; margin-top:10px ; float:left ; width:450px ; border : 2px solid gray ;" />
+<div style="float : left;  margin-top:10px ; margin-left:40px">
+    <p id="address" style="font-size:24px; position:relative; top:10px">Address: @Model.Address</p>
+    <p id="description" style="font-size:24px; position:relative; top:10px;">Description: @Model.Description </p>
+
+    <p style="position:relative; top: 168px; left:3px">
+        <a class="btn btn-primary" href="@Url.Action("../MenuItem/Index", new { restaurantID = Model.RestaurantID })">Menu Items</a>
+        @if (user.Discriminator.Equals("SystemManager"))
+        {
+            <a class="btn btn-primary" href="@Url.Action("../Register/RegisterRestaurantManager", new { restaurantID = Model.RestaurantID })">Add Manager</a>
+        }
+
+        @if (user.Discriminator.Equals("RestaurantManager"))
+        {
+            <a class="btn btn-primary" href="@Url.Action("../Restaurant/EditRestaurant", new { restaurantID = Model.RestaurantID })">Edit Restaurant</a>
+        }
+        
+    </p>
+</div>
+<div class="clear_div" style="clear:both"></div>

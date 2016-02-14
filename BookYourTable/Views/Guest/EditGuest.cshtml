@@ -1,0 +1,71 @@
+﻿@model BookYourTable.Models.User
+@{
+    ViewBag.Title = "Edit Guest";
+}
+
+<h2>Edit Guest Form</h2>
+<form class="form-horizontal" method="post" action="~/Guest/EditGuest" id="register-form">
+    <fieldset>
+        <legend>Fields with '*' are mandatory!</legend>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.E_Mail, new { @class = "col-lg-2 control-label required" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.E_Mail, new { @class = "form-control", value = Model.E_Mail, id = "inputMail", @readonly = "true" })
+                @Html.ValidationMessageFor(model => model.E_Mail)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", value = Model.FirstName, id = "firstName" })
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", value = Model.LastName, id = "lastName" })
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "col-lg-2 control-label required" })
+            <div class="col-lg-10">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", value = Model.Password, id = "inputPassword" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col-lg-2 control-label required" })
+            <div class="col-lg-10">
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", value = Model.Password, id = "inputConfirmPassword" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+        </div>
+
+        @if (Model.Discriminator.Equals("Guest"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control", value = Model.Address, id = "address" })
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-primary">Reset</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+

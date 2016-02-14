@@ -25,5 +25,15 @@ namespace BookYourTable.BLL.Handlers
         {
             _registerHandlerDAL.ConfirmRegistration(e_mail);
         }
+
+        public void RegisterRestaurant(string name, string description, string address)
+        {
+            _registerHandlerDAL.RegisterRestaurant(name, description, address);
+        }
+
+        public void RegisterRestaurantManager(string e_mail, string password, string firstName, string lastName, int? restaurantID)
+        {
+            _registerHandlerDAL.RegisterRestaurantManager(e_mail, password, firstName, lastName, restaurantID);
+        }
     }
 }

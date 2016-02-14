@@ -3,11 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using BookYourTable.BLL.Models;
+using System.Text;
 
 namespace BookYourTable.Models
 {
     public class User
     {
+        public User()
+        {
+
+        }
+
+        public User(UserBLL userBLL)
+        {
+            UserID = userBLL.UserID;
+            E_Mail = userBLL.E_Mail;
+
+            byte[] data = Convert.FromBase64String(userBLL.Password);
+            string decodedPassword = Encoding.UTF8.GetString(data);
+
+            Password = decodedPassword;
+            ConfirmPassword = userBLL.Password;
+            FirstName = userBLL.FirstName;
+            LastName = userBLL.LastName;
+            Address = userBLL.Address;
+            ImgUrl = userBLL.ImgUrl;
+            RestaurantID = userBLL.RestaurantID;
+            Discriminator = userBLL.Discriminator;
+        }
+
         public int UserID { get; set; }
 
         [Required(ErrorMessage = "E-Mail cannot be empty!")]
@@ -37,7 +62,7 @@ namespace BookYourTable.Models
 
         public String ImgUrl { get; set; }
 
-        public int RestaurantID { get; set; }
+        public int? RestaurantID { get; set; }
 
         public String Discriminator { get; set; }
 

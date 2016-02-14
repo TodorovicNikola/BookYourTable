@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BookYourTable.BLL.Models.RestaurantBLL>
+@using BookYourTable.BLL.Models;
+
+@{
+    ViewBag.Title = "Restaurants";
+}
+
+@{UserBLL user = (UserBLL)Session["user"];}
+
+<h2>Restaurants</h2>
+
+    <form class="form-inline" style="position :relative; top: -47px; float:right;" action="#" method="post">
+        <fieldset>
+            @if (TempData["Visibility"] != null)
+            {
+                <div class="form-group" style="left:-53px; position:relative">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <div class="alert alert-dismissible alert-success" style="width:320px; visibility:visible">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <strong>@TempData["Message"]</strong>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+            <div class="form-group">
+
+                @if (user.Discriminator.Equals("SystemManager"))
+                {
+                    <a class="btn btn-primary" style="position:relative; top:-11px; right:5px"  href="../Register/RegisterRestaurant">Add Restaurant</a>
+                }
+
+                
+                <input type="search" name="inputSearch" class="form-control" id="inputSearch" placeholder="Search..." style="margin-bottom:20px; width:200px" />
+                <input type="image" id="search-button" src="~/Content/Images/search_button.png" alt="Submit" width="30" height="30" style="position: relative; top: 0px">
+            </div>
+        </fieldset>
+    </form>
+
+    <div style="clear:both"></div>
+
+    <div class="restaurants" style="position:relative; top: -40px">
+        <div></div>
+        @foreach(var item in Model)
+        {
+            <div class="restaurant" id="@item.RestaurantID">
+                <div class="restaurant-left">
+                    <a href="@Url.Action("../Restaurant/Single", new { restaurantID = item.RestaurantID })">
+                        <img class="poster" src="~/Content/Images/restaurant_default.jpg" />
+                    </a>
+                </div>
+                <div class="restaurant-right">
+                    <h3 style="text-transform: uppercase;">@Html.ActionLink(item.Name, "../Restaurant/Single", new { restaurantID = item.RestaurantID })</h3>
+                    <p style="position:relative; top:130px">Address: @item.Address</p>
+                    <p style="position:relative; top:120px;">Description: @item.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div style="clear: both"></div>
+
+

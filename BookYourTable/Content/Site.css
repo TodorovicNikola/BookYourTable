@@ -29,3 +29,157 @@ textarea {
     font-weight: bold;
     color: red; 
 }
+
+/*** RESTAURANTS PAGE ***/
+div.restaurant{
+    width: 550px;
+    float: left;
+    margin-bottom: 20px;
+    background-color:#f6f6f6 !important;
+}
+
+img.poster{
+    width: 200px !important;
+    height: 245px !important;
+    border: 2px solid #a5a5a5;
+}
+
+div.restaurant h3 a{
+    color: black;
+}
+
+div.restaurant h3 a:hover{
+    color: #555;
+    text-decoration: none;
+}
+
+div.restaurant:nth-child(2n+1){
+    margin-left: 40px;
+}
+
+div.restaurant div{
+    float: left;
+}
+
+div.restaurant div.restaurant-right{
+    padding-left: 20px;
+    border: 2px solid #a5a5a5;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: none;
+    width: 350px;
+    height: 245px;
+}
+
+div.restaurant div.restaurant-right{
+    padding-left: 20px;
+    border: 2px solid #a5a5a5;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: none;
+    width: 350px;
+    height: 245px;
+}
+
+div.restaurant div.restaurant-right div.rateit{
+    position: relative;
+    top: 95px;
+}
+
+div.restaurant div.restaurant-right span{
+    position: relative;
+    top: 90px;
+    left: 15px;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+div.restaurant div.restaurant-right p:last-child{
+    position: relative;
+    top: 90px;
+}
+
+/*** GUESTS PAGE ***/
+div.guest{
+    width: 550px;
+    float: left;
+    margin-bottom: 20px;
+    background-color:#f6f6f6 !important;
+}
+
+img.image{
+    width: 150px !important;
+    height: 150px !important;
+    border: 2px solid #a5a5a5;
+}
+
+div.guest h3 a{
+    color: black;
+}
+
+div.guest h3 a:hover{
+    color: #555;
+    text-decoration: none;
+}
+
+div.guest:nth-child(2n+1){
+    margin-left: 40px;
+}
+
+div.guest div{
+    float: left;
+}
+
+div.guest div.guest-right{
+    padding-left: 20px;
+    border: 2px solid #a5a5a5;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: none;
+    width: 350px;
+    height: 150px;
+}
+
+div.guest div.guest-right{
+    padding-left: 20px;
+    border: 2px solid #a5a5a5;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: none;
+    width: 400px;
+    height: 150px;
+}
+
+div.guest div.guest-right div.rateit{
+    position: relative;
+    top: 95px;
+}
+
+div.guest div.guest-right span{
+    position: relative;
+    top: 90px;
+    left: 15px;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+div.guest div.guest-right p:last-child{
+    position: relative;
+    top: 90px;
+}
+
+/*** TABLE GRID ***/
+.grid { margin:1em auto; border-collapse:collapse }
+
+.grid td {
+    cursor:pointer;
+    width:30px; height:30px;
+    border:1px dotted #ccc;
+    text-align:center;
+    font-family:sans-serif; font-size:16px
+}
+.grid td.clicked {
+    background-color:red;
+}

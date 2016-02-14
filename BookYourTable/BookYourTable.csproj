@@ -156,9 +156,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MenuItemController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,6 +177,10 @@
     <Content Include="Content\bootstrap-flat.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\guest_default.png" />
+    <Content Include="Content\Images\menuItem_default.jpg" />
+    <Content Include="Content\Images\restaurant_default.jpg" />
+    <Content Include="Content\Images\search_button.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -196,6 +203,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\TablesGrid.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -213,6 +221,16 @@
     <Content Include="Views\Register\RegisterGuest.cshtml" />
     <Content Include="Views\Register\ConfirmationSucceeded.cshtml" />
     <Content Include="Views\Register\ConfirmationNeeded.cshtml" />
+    <Content Include="Views\Shared\_Navbar_Right.cshtml" />
+    <Content Include="Views\Restaurant\Index.cshtml" />
+    <Content Include="Views\Restaurant\Single.cshtml" />
+    <Content Include="Views\Register\RegisterRestaurant.cshtml" />
+    <Content Include="Views\Register\RegisterRestaurantManager.cshtml" />
+    <Content Include="Views\Guest\Index.cshtml" />
+    <Content Include="Views\Guest\Single.cshtml" />
+    <Content Include="Views\Guest\EditGuest.cshtml" />
+    <Content Include="Views\Restaurant\EditRestaurant.cshtml" />
+    <Content Include="Views\MenuItem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

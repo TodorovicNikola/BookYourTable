@@ -5,12 +5,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BookYourTable.BLL.Handlers;
+using BookYourTable.BLL.Models;
 
 namespace BookYourTable.Controllers
 {
     public class LoginController : Controller
     {
-        LoginHandlerBLL _loginHandlerBLL;
+        LoginHandlerBLL _loginHandlerBLL = new LoginHandlerBLL();
 
         [HttpGet]
         public ActionResult Login()
@@ -23,12 +24,29 @@ namespace BookYourTable.Controllers
         [HttpPost]
         public ActionResult Login(string e_mail, string password)
         {
-            
+            string message;
 
-            ViewData["Visibility"] = "visible";
-            ViewData["Message"] = e_mail + " " + password;
+            UserBLL userBLL = _loginHandlerBLL.loginAttempt(e_mail, password, out message);
+
+            if (userBLL != null)
+            {
+                Session["user"] = userBLL;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewData["Visibility"] = "visible";
+                ViewData["Message"] = message;
+            }
+
 
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session["user"] = null;
+            return RedirectToAction("Login", "Login");
         }
     }
 }

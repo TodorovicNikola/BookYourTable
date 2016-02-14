@@ -23,31 +23,37 @@ namespace BookYourTable.DAL.Handlers
 
         public void RegisterGuest(String e_mail, String password, String firstName, String lastName, String address)
         {
-            Guest guest = new Guest();
-            guest.E_Mail = e_mail;
-            guest.Password = password;
-            guest.FirstName = firstName;
-            guest.LastName = lastName;
-            guest.Address = address;
-            guest.ConfirmedRegistration = false;
-
-            var passwordBytes = System.Text.Encoding.UTF8.GetBytes(guest.Password);
+            var passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
             String encodedPassword = System.Convert.ToBase64String(passwordBytes);
-            guest.Password = encodedPassword;
 
-            _context.Users.Add(guest);
+            _context.Users.Add(new Guest { E_Mail = e_mail, Password = encodedPassword, FirstName = firstName, LastName = lastName, Address = address, ConfirmedRegistration = false});
             _context.SaveChanges();
         }
 
         public void ConfirmRegistration(String e_mail)
         {
-            User user = _context.Users.Where(u => u.E_Mail == e_mail).First();
+            Guest guest = _context.Guests.Where(u => u.E_Mail == e_mail).First();
 
-            if(user != null)
+            if(guest != null)
             {
-                user.ConfirmedRegistration = true;
+                guest.ConfirmedRegistration = true;
                 _context.SaveChanges();
             }
+        }
+
+        public void RegisterRestaurant(string name, string description, string address)
+        {
+            _context.Restaurants.Add(new Restaurant { Name = name, Description = description, Address = address });
+            _context.SaveChanges();
+        }
+
+        public void RegisterRestaurantManager(string e_mail, string password, string firstName, string lastName, int? restaurantID)
+        {
+            var passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+            String encodedPassword = System.Convert.ToBase64String(passwordBytes);
+
+            _context.RestaurantManagers.Add(new RestaurantManager { E_Mail = e_mail, Password = encodedPassword, FirstName = firstName, LastName = lastName, RestaurantID = (int)restaurantID });
+            _context.SaveChanges();
         }
     }
 }

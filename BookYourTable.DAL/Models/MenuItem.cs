@@ -12,9 +12,11 @@ namespace BookYourTable.DAL.Models
     {
         [Key]
         [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MenuItemID { get; set; }
 
         [Key]
+        [ForeignKey("Restaurant")]
         [Column(Order = 1)]
         public int RestaurantID { get; set; }
 
@@ -24,7 +26,9 @@ namespace BookYourTable.DAL.Models
 
         [StringLength(2048)]
         public String Description { get; set; }
-        public float Price { get; set; }
+
+        [Required]
+        public Decimal Price { get; set; }
         
         [StringLength(128)]
         public String ImgUrl { get; set; }

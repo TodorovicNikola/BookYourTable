@@ -1,0 +1,19 @@
+﻿@using BookYourTable.BLL.Models;
+
+
+<ul class="nav navbar-right navbar-nav">
+    @if (Session["user"] == null)
+    {
+        <li>@Html.ActionLink("Register", "RegisterGuest", "Register", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log In", "Login", "Login", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    }
+    else
+    {
+        UserBLL user = (UserBLL)Session["user"];
+        <li>@Html.ActionLink(user.FirstName + " " + user.LastName, "Single", "Guest", new { userID = user.UserID }, htmlAttributes: new { id = "userProfile" })</li>
+
+        <li>@Html.ActionLink("Log Out", "Logout", "Login", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+    }
+
+</ul>
+
