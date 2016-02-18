@@ -98,7 +98,7 @@ namespace BookYourTable.DAL.Migrations
                         Description = c.String(nullable: false, maxLength: 256),
                         ImgUrl = c.String(maxLength: 128),
                         Address = c.String(nullable: false, maxLength: 256),
-                        TablesConfigured = c.Boolean(nullable: false),
+                        Configured = c.Boolean(nullable: false),
                         TablesMatrixWidth = c.Int(),
                         TablesMatrixHeight = c.Int(),
                     })

@@ -54,9 +54,13 @@
     <Compile Include="Handlers\MenuItemHandlerDAL.cs" />
     <Compile Include="Handlers\RegisterHandlerDAL.cs" />
     <Compile Include="Handlers\RestaurantHandlerDAL.cs" />
-    <Compile Include="Migrations\201602141809550_init.cs" />
-    <Compile Include="Migrations\201602141809550_init.Designer.cs">
-      <DependentUpon>201602141809550_init.cs</DependentUpon>
+    <Compile Include="Migrations\201602171611474_init.cs" />
+    <Compile Include="Migrations\201602171611474_init.Designer.cs">
+      <DependentUpon>201602171611474_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602171613419_init1.cs" />
+    <Compile Include="Migrations\201602171613419_init1.Designer.cs">
+      <DependentUpon>201602171613419_init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Friendship.cs" />
@@ -78,8 +82,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602141809550_init.resx">
-      <DependentUpon>201602141809550_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602171611474_init.resx">
+      <DependentUpon>201602171611474_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171613419_init1.resx">
+      <DependentUpon>201602171613419_init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -32,5 +32,11 @@ namespace BookYourTable.DAL.Handlers
             _context.SaveChanges();
         }
 
+        public void RemoveRestaurant(int restaurantID)
+        {
+            _context.Restaurants.Find(restaurantID).Configured = false;
+            _context.SaveChanges();
+        }
+
     }
 }

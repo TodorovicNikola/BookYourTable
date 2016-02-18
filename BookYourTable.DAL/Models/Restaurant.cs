@@ -27,7 +27,7 @@ namespace BookYourTable.DAL.Models
         public String Address { get; set; }
 
         [Required]
-        public bool TablesConfigured { get; set; }
+        public bool Configured { get; set; }
 
         public int? TablesMatrixWidth { get; set; }
         public int? TablesMatrixHeight { get; set; }

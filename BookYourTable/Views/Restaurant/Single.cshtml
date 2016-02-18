@@ -22,13 +22,42 @@
         @if (user.Discriminator.Equals("SystemManager"))
         {
             <a class="btn btn-primary" href="@Url.Action("../Register/RegisterRestaurantManager", new { restaurantID = Model.RestaurantID })">Add Manager</a>
+            @Html.ActionLink("Remove Restaurant", "RemoveRestaurant", "Restaurant", new { restaurantID = Model.RestaurantID }, new { @class = "btn btn-primary", onclick = "return confirm('Are you sure you want to remove this restaurant?');", style = "position:relative; left:1px" } )
         }
 
         @if (user.Discriminator.Equals("RestaurantManager"))
         {
             <a class="btn btn-primary" href="@Url.Action("../Restaurant/EditRestaurant", new { restaurantID = Model.RestaurantID })">Edit Restaurant</a>
+
+            if (Model.Configured)
+            {
+                <a class="btn btn-primary" onclick="openModal();">Configure Seats</a>
+            }
         }
         
     </p>
 </div>
-<div class="clear_div" style="clear:both"></div>
+<div class="clearDiv" style="clear:both"></div>
+
+<div class="modal" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" aria-hidden="true" type="button" onclick="closeModal()" data-dismiss="modal">X</button>
+                <h4 class="modal-title">Matrix Data:</h4>
+            </div>
+            <div class="modal-body">
+                <label class="control-label" for="matrixWidth">Width:</label>
+                <input class="form-control" id="matrixWidth" type="text" placeholder="Width">
+                <label class="control-label" for="matrixHeight">Height:</label>
+                <input class="form-control" id="matrixHeight" type="text" placeholder="Height">
+    
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" data-dismiss="modal" onclick="closeModal()">Close</button>
+                <button class="btn btn-primary" type="button" onclick="applyModal()">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>
+

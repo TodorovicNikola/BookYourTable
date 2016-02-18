@@ -181,5 +181,15 @@ div.guest div.guest-right p:last-child{
     font-family:sans-serif; font-size:16px
 }
 .grid td.clicked {
-    background-color:red;
+    background-color:lightseagreen;
+}
+
+td.cell {
+    width:58px;
+    height:58px;
+}
+
+a.btn-configure{
+    position:relative;
+    left:300px;
 }

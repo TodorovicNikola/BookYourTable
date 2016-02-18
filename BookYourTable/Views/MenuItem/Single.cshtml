@@ -1,0 +1,23 @@
+﻿@model BookYourTable.BLL.Models.MenuItemBLL
+@using BookYourTable.BLL.Models;
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@{ UserBLL user = (UserBLL)Session["user"]; }
+
+<h2>@Model.Name</h2>
+
+<img src="~/Content/Images/menuItem_default.jpg" alt="Image" style="margin-left:20px ; margin-top:10px ; float:left ; width:250px ; height:250px; border : 2px solid gray ;" />
+<div style="float:left; position:relative;  margin-top:10px ; margin-left:40px">
+    <p id="description" style="font-size:24px; position:relative; top:10px">Description: @Model.Description</p>
+    <p id="price" style="font-size:24px; position:relative; top:10px">Price: @Model.Price</p>
+
+    <p style="position:relative; float:right; top: 10px; left:3px">
+
+        <a class="btn btn-primary" href="@Url.Action("../MenuItem/EditMenuItem", new { menuItemID = Model.MenuItemID, name = Model.Name, description = Model.Description, price = Model.Price })">Edit Menu Item</a>
+        @Html.ActionLink("Delete Menu Item", "DeleteMenuItem", "MenuItem", new { menuItemID = Model.MenuItemID }, new { @class = "btn btn-primary", onclick = "return confirm('Are you sure you want to remove this menu item?');"})
+    </p>
+</div>
+<div class="clear_div" style="clear:both"></div>

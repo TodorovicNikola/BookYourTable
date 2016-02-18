@@ -25,6 +25,10 @@ namespace BookYourTable.Models
         [StringLength(256, ErrorMessage = "Description cannot be longer than 256 characters!")]
         public String Description { get; set; }
 
+        public Boolean Configured { get; set; }
+        public int? TablesMatrixWidth { get; set; }
+        public int? TablesMatrixHeight { get; set; }
+
         public Restaurant()
         {
 
@@ -36,7 +40,10 @@ namespace BookYourTable.Models
             Name = restaurantBLL.Name;
             Description = restaurantBLL.Description;
             Address = restaurantBLL.Address;
+            Configured = restaurantBLL.Configured;
             ImgUrl = restaurantBLL.ImgUrl;
+            TablesMatrixWidth = restaurantBLL.TablesMatrixWidth;
+            TablesMatrixHeight = restaurantBLL.TablesMatrixHeight;
         }
 
 

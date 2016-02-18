@@ -14,6 +14,7 @@ namespace BookYourTable.BLL.Models
         public String Description { get; set; }
         public String ImgUrl { get; set; }
         public String Address { get; set; }
+        public Boolean Configured { get; set; }
         public int? TablesMatrixWidth { get; set; }
         public int? TablesMatrixHeight { get; set; }
 
@@ -26,6 +27,7 @@ namespace BookYourTable.BLL.Models
             Address = restaurantDAL.Address;
             TablesMatrixWidth = restaurantDAL.TablesMatrixWidth;
             TablesMatrixHeight = restaurantDAL.TablesMatrixHeight;
+            Configured = restaurantDAL.Configured;
         }
 
     }

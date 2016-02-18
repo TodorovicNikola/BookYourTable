@@ -35,5 +35,10 @@ namespace BookYourTable.BLL.Handlers
         {
             _restaurantHandlerDAL.EditRestaurant(restaurantID, name, description, address);
         }
+
+        public void RemoveRestaurant(int restaurantID)
+        {
+            _restaurantHandlerDAL.RemoveRestaurant(restaurantID);
+        }
     }
 }

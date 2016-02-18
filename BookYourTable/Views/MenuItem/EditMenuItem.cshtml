@@ -1,0 +1,51 @@
+﻿@model BookYourTable.Models.MenuItem
+
+@{
+    ViewBag.Title = "Add Menu Item";
+}
+
+<h2>Add Menu Item</h2>
+
+<form class="form-horizontal" method="post" action="~/MenuItem/EditMenuItem" id="register-form">
+    <fieldset>
+        <legend>Fields with '*' are mandatory!</legend>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 control-label required" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", value = Model.Name, id = "inputName" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", value = Model.Description, id = "description", rows = "3" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, new { @class = "col-lg-2 control-label required" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", value = Model.Price, id = "price" })
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-primary">Reset</button>
+            </div>
+        </div>
+        <div class="form-group" style="visibility:hidden">
+            @Html.LabelFor(model => model.MenuItemID, new { @class = "col-lg-2 control-label required" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.MenuItemID, new { @class = "form-control", value = Model.MenuItemID, id = "inputName" })
+                @Html.ValidationMessageFor(model => model.MenuItemID)
+            </div>
+        </div>
+    </fieldset>
+</form>
+
