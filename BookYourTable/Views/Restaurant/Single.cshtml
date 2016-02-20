@@ -6,9 +6,15 @@
     UserBLL user = (UserBLL)Session["user"];
 }
 <head>
-    <script src="~/Scripts/TablesGrid.js"></script>
+    @if (!Model.Configured)
+    {
+        <meta http-equiv="Cache-control" content="no-cache">
+        <meta http-equiv="Expires" content="-1">
+        <script src="~/Scripts/TablesGrid.js"></script>
+
+    }
 </head>
-<h2 style="text-transform: uppercase;" >@Model.Name</h2>
+<h2 style="text-transform: uppercase;">@Model.Name</h2>
 
 <input type="hidden" value="@Model.RestaurantID" id="restaurantID" />
 
@@ -22,42 +28,96 @@
         @if (user.Discriminator.Equals("SystemManager"))
         {
             <a class="btn btn-primary" href="@Url.Action("../Register/RegisterRestaurantManager", new { restaurantID = Model.RestaurantID })">Add Manager</a>
-            @Html.ActionLink("Remove Restaurant", "RemoveRestaurant", "Restaurant", new { restaurantID = Model.RestaurantID }, new { @class = "btn btn-primary", onclick = "return confirm('Are you sure you want to remove this restaurant?');", style = "position:relative; left:1px" } )
+            @Html.ActionLink("Remove Restaurant", "RemoveRestaurant", "Restaurant", new { restaurantID = Model.RestaurantID }, new { @class = "btn btn-primary", onclick = "return confirm('Are you sure you want to remove this restaurant?');", style = "position:relative; left:1px" })
         }
 
         @if (user.Discriminator.Equals("RestaurantManager"))
         {
             <a class="btn btn-primary" href="@Url.Action("../Restaurant/EditRestaurant", new { restaurantID = Model.RestaurantID })">Edit Restaurant</a>
 
-            if (Model.Configured)
+            if (!Model.Configured)
             {
                 <a class="btn btn-primary" onclick="openModal();">Configure Seats</a>
             }
         }
-        
+
     </p>
 </div>
 <div class="clearDiv" style="clear:both"></div>
 
-<div class="modal" id="modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" aria-hidden="true" type="button" onclick="closeModal()" data-dismiss="modal">X</button>
-                <h4 class="modal-title">Matrix Data:</h4>
-            </div>
-            <div class="modal-body">
-                <label class="control-label" for="matrixWidth">Width:</label>
-                <input class="form-control" id="matrixWidth" type="text" placeholder="Width">
-                <label class="control-label" for="matrixHeight">Height:</label>
-                <input class="form-control" id="matrixHeight" type="text" placeholder="Height">
-    
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" type="button" data-dismiss="modal" onclick="closeModal()">Close</button>
-                <button class="btn btn-primary" type="button" onclick="applyModal()">Apply</button>
+@if (!Model.Configured)
+{
+    <div class="modal" id="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" aria-hidden="true" type="button" onclick="closeModal()" data-dismiss="modal">X</button>
+                    <h4 class="modal-title">Matrix Data:</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="control-label" for="matrixWidth">Width:</label>
+                    <input class="form-control" id="matrixWidth" type="text" placeholder="Width">
+                    <label class="control-label" for="matrixHeight">Height:</label>
+                    <input class="form-control" id="matrixHeight" type="text" placeholder="Height">
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal" onclick="closeModal()">Close</button>
+                    <button class="btn btn-primary" type="button" onclick="applyModal()">Apply</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="modal" id="modalBuffering">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Please Wait :)</h4>
+                </div>
+                <div class="modal-body">
+                    <img style="width:85px; height:85px" src="~/Content/Images/guest_default.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <br />
+    <hr />
+    <h3>Table Configuration</h3>
+    if (user.Discriminator.Equals("Guest"))
+    {
+        <form class="form-inline" style="position :relative; top: -43px; float:right;" action="#" method="post">
+            <fieldset>
+                <div class="form-group">
+                    <a class="btn btn-primary" href="@Url.Action("../Restaurant/BookTable", new { restaurantID = Model.RestaurantID })">Book Your Table</a>
+                </div>
+            </fieldset>
+        </form>
+    }
+
+
+
+<table class="grid">
+    @for (int i = 0; i < Model.TablesMatrixWidth; i++)
+    {
+        <tr>
+            @for (int j = 0; j < Model.TablesMatrixHeight; j++)
+            {
+                int? n = i * Model.TablesMatrixWidth + j;
+
+                if (Model.Tables.Any(c => c.CellNumber == n))
+                {
+                    <td class="cell clicked"></td>
+                }
+                else
+                {
+                    <td class="cell"></td>
+                }
+            }
+        </tr>
+    }
+</table>
+}

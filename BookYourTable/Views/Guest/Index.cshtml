@@ -14,6 +14,19 @@
 <form class="form-inline" style="position :relative; top: -47px; float:right;" action="#" method="post">
     <fieldset>
         <div class="form-group">
+            <ul class="nav nav-pills" style="position:relative; top:-9px; right:4px; height:40px">
+                <li class="dropdown active">
+                    <a class="dropdown-toggle" aria-expanded="false" href="#" data-toggle="dropdown">
+                        Sort By <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("../Guest/Index", new { sortBy = "firstName" })">First Name</a></li>
+                        <li><a href="@Url.Action("../Guest/Index", new { sortBy = "lastName" })">Last Name</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group">
             <input type="search" name="inputSearch" class="form-control" id="inputSearch" placeholder="Search..." style="margin-bottom:20px; width:200px" />
             <input type="image" id="search-button" src="~/Content/Images/search_button.png" alt="Submit" width="30" height="30" style="position: relative; top: 0px">
         </div>
@@ -37,6 +50,23 @@
                 <div class="guest-right">
                     <h3 style="text-transform: uppercase;">@Html.ActionLink(item.FirstName + " " + item.LastName, "../Guest/Single", new { userID = item.UserID })</h3>
                     <p style="position:relative; top:60px">E-Mail: @item.E_Mail</p>
+                    @if (!user.SentFriendshipRequests.Any(s => s.GuestRecieverID.Equals(item.UserID)) && !user.RecievedFriendshipRequests.Any(s => s.GuestSenderID.Equals(item.UserID)))
+                    {
+                        <a href="@Url.Action("../Guest/SendRequest", new { sendRequestTo = item.UserID })" class="btn btn-primary" style="position:relative; left:250px;top:5px">Send Request</a>
+                    }
+                    else if (user.SentFriendshipRequests.Any(s => s.GuestRecieverID.Equals(item.UserID) && s.Confirmed != true))
+                    {
+                        <a href="#" class="btn btn-primary disabled" style="position:relative; left:250px;top:5px">Request Sent</a>
+                    }
+                    else if (user.RecievedFriendshipRequests.Any(s => s.GuestSenderID.Equals(item.UserID) && s.Confirmed == null))
+                    {
+                        <a href="@Url.Action("../Guest/ConfirmRequest", new { confirmRequestFrom = item.UserID })" class="btn btn-success" style="position:relative;top:-20px">Confirm Friendship</a>
+                        <a href="@Url.Action("../Guest/DenyRequest", new { denyRequestFrom = item.UserID })" class="btn btn-success" style="position:relative;top:-20px">Deny Friendship</a>
+                    }
+                    else if (user.SentFriendshipRequests.Any(s => s.GuestRecieverID.Equals(item.UserID) && s.Confirmed == true) || user.RecievedFriendshipRequests.Any(s => s.GuestSenderID.Equals(item.UserID) && s.Confirmed == true))
+                    {
+                        <a href="" class="btn btn-info" style="position:relative; left:250px;top:5px; width:122px">Friend</a>
+                    }
                 </div>
             </div>
         }

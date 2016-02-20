@@ -12,13 +12,13 @@ namespace BookYourTable.BLL.Handlers
     {
         private RestaurantHandlerDAL _restaurantHandlerDAL = new RestaurantHandlerDAL();
 
-        public List<RestaurantBLL> AcquireAllRestaurants()
+        public List<RestaurantBLL> AcquireAllRestaurants(String discriminator)
         {
             List<RestaurantBLL> restaurantsBLL = new List<RestaurantBLL>();
 
-            var restaurantsDAL = _restaurantHandlerDAL.AcquireAllRestaurants();
+            var restaurantsDAL = _restaurantHandlerDAL.AcquireAllRestaurants(discriminator);
 
-            foreach(var restaurantDAL in restaurantsDAL)
+            foreach (var restaurantDAL in restaurantsDAL)
             {
                 restaurantsBLL.Add(new RestaurantBLL(restaurantDAL));
             }
@@ -39,6 +39,11 @@ namespace BookYourTable.BLL.Handlers
         public void RemoveRestaurant(int restaurantID)
         {
             _restaurantHandlerDAL.RemoveRestaurant(restaurantID);
+        }
+
+        public void ConfigureTables(int restaurantID, List<int> tableIndexes, int width, int height)
+        {
+            _restaurantHandlerDAL.ConfigureTables(restaurantID, tableIndexes, width, height);
         }
     }
 }

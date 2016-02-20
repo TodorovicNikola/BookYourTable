@@ -17,6 +17,9 @@ namespace BookYourTable.DAL.Models
         public String ImgUrl { get; set; }
         public int? RestaurantID { get; set; }
         public String Discriminator { get; set; }
+        public Restaurant Restaurant { get; set; }
+        public List<Friendship> SentFriendshipRequests { get; set; }
+        public List<Friendship> RecievedFriendshipRequests { get; set; }
 
         public UserDBReplica(Guest guest)
         {
@@ -28,6 +31,12 @@ namespace BookYourTable.DAL.Models
             Address = guest.Address;
             ImgUrl = guest.ImgUrl;
             Discriminator = typeof(Guest).Name;
+
+            if(guest.SentFriendshipRequests != null)
+            {
+                SentFriendshipRequests = guest.SentFriendshipRequests.Cast<Friendship>().ToList();
+                RecievedFriendshipRequests = guest.RecievedFriendshipRequests.Cast<Friendship>().ToList();
+            }
         }
 
         public UserDBReplica(SystemManager systemManager)
@@ -49,6 +58,7 @@ namespace BookYourTable.DAL.Models
             LastName = restaurantManager.LastName;
             RestaurantID = restaurantManager.RestaurantID;
             Discriminator = typeof(RestaurantManager).Name;
+            Restaurant = restaurantManager.Restaurant;
         }
     }
 }

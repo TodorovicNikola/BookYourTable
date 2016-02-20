@@ -18,6 +18,10 @@ namespace BookYourTable.BLL.Models
         public String ImgUrl { get; set; }
         public int? RestaurantID { get; set; }
         public String Discriminator { get; set; }
+        public List<FriendshipBLL> SentFriendshipRequests { get; set; }
+        public List<FriendshipBLL> RecievedFriendshipRequests { get; set; }
+        public RestaurantBLL Restaurant { get; set; }
+
 
         public UserBLL(Guest guest)
         {
@@ -29,6 +33,23 @@ namespace BookYourTable.BLL.Models
             Address = guest.Address;
             ImgUrl = guest.ImgUrl;
             Discriminator = typeof(Guest).Name;
+
+            SentFriendshipRequests = new List<FriendshipBLL>();
+            RecievedFriendshipRequests = new List<FriendshipBLL>();
+
+            if(guest.SentFriendshipRequests != null)
+            {
+                foreach (Friendship friendship in guest.SentFriendshipRequests)
+                {
+                    SentFriendshipRequests.Add(new FriendshipBLL(friendship));
+                }
+
+                foreach (Friendship friendship in guest.RecievedFriendshipRequests)
+                {
+                    SentFriendshipRequests.Add(new FriendshipBLL(friendship));
+                }
+            }
+
         }
 
         public UserBLL(SystemManager systemManager)
@@ -63,6 +84,27 @@ namespace BookYourTable.BLL.Models
             ImgUrl = user.ImgUrl;
             RestaurantID = user.RestaurantID;
             Discriminator = user.Discriminator;
+
+            SentFriendshipRequests = new List<FriendshipBLL>();
+            RecievedFriendshipRequests = new List<FriendshipBLL>();
+
+            if (user.SentFriendshipRequests != null)
+            {
+                foreach (Friendship friendship in user.SentFriendshipRequests)
+                {
+                    SentFriendshipRequests.Add(new FriendshipBLL(friendship));
+                }
+
+                foreach (Friendship friendship in user.RecievedFriendshipRequests)
+                {
+                    RecievedFriendshipRequests.Add(new FriendshipBLL(friendship));
+                }
+            }
+
+            if(user.Restaurant != null)
+            {
+                Restaurant = new RestaurantBLL(user.Restaurant);
+            }
         }
     }
 }

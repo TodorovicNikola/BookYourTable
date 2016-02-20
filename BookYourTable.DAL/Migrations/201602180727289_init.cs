@@ -79,7 +79,7 @@ namespace BookYourTable.DAL.Migrations
                 "dbo.Tables",
                 c => new
                     {
-                        TableID = c.Int(nullable: false),
+                        TableID = c.Int(nullable: false, identity: true),
                         RestaurantID = c.Int(nullable: false),
                         Capacity = c.Int(),
                         CellNumber = c.Int(nullable: false),

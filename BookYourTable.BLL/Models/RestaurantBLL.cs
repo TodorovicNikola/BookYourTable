@@ -17,9 +17,12 @@ namespace BookYourTable.BLL.Models
         public Boolean Configured { get; set; }
         public int? TablesMatrixWidth { get; set; }
         public int? TablesMatrixHeight { get; set; }
+        public List<TableBLL> Tables { get; set; }
 
         public RestaurantBLL(Restaurant restaurantDAL)
         {
+            Tables = new List<TableBLL>();
+
             RestaurantID = restaurantDAL.RestaurantID;
             Name = restaurantDAL.Name;
             Description = restaurantDAL.Description;
@@ -28,6 +31,14 @@ namespace BookYourTable.BLL.Models
             TablesMatrixWidth = restaurantDAL.TablesMatrixWidth;
             TablesMatrixHeight = restaurantDAL.TablesMatrixHeight;
             Configured = restaurantDAL.Configured;
+
+            if(restaurantDAL.Tables != null)
+            {
+                foreach(Table table in restaurantDAL.Tables)
+                {
+                    Tables.Add(new TableBLL(table));
+                }
+            }
         }
 
     }

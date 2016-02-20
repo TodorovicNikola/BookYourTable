@@ -12,9 +12,11 @@ namespace BookYourTable.DAL.Models
     {   
         [Key]
         [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TableID { get; set; }
 
         [Key]
+        [ForeignKey("Restaurant")]
         [Column(Order = 1)]
         public int RestaurantID { get; set; }
 

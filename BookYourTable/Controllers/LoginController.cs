@@ -31,7 +31,19 @@ namespace BookYourTable.Controllers
             if (userBLL != null)
             {
                 Session["user"] = userBLL;
-                return RedirectToAction("Index", "Home");
+
+                if (userBLL.Discriminator.Equals("Guest"))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                if (userBLL.Discriminator.Equals("RestaurantManager"))
+                {
+                    return RedirectToAction("Single", "Restaurant");
+                }
+
+                return RedirectToAction("Index", "Restaurant");
+                
             }
             else
             {

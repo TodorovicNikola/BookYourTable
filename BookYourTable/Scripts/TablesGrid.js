@@ -1,21 +1,6 @@
 ﻿
 function openModal() {
-   $("#modal").show({
-        message: 'Your most favorite fruit: <input type="text" class="form-control">',
-        onhide: function (dialogRef) {
-            var fruit = dialogRef.getModalBody().find('input').val();
-            if ($.trim(fruit.toLowerCase()) !== 'banana') {
-                alert('Need banana!');
-                return false;
-            }
-        },
-        buttons: [{
-            label: 'Close',
-            action: function (dialogRef) {
-                dialogRef.close();
-            }
-        }]
-    });
+   $("#modal").show();
 }
 
 function closeModal() {
@@ -132,7 +117,6 @@ function applyModal() {
 
         $('#mainTable tr').each(function () {
             $(this).find('td').each(function () {
-                alert($(this).attr('class'));
                 if ($(this).is('#clicked')) {
                     seatNumbers.push(i);
                 }
@@ -145,6 +129,8 @@ function applyModal() {
             return;
         }
 
+        $("#modalBuffering").show();
+
         $.post(
                    "../Restaurant/ConfigureRestaurant",
                    {
@@ -153,7 +139,8 @@ function applyModal() {
                        height: height
                    },
                    function () {
-                       alert("Successfully Configured Tables!");
+                       $("#modalBuffering").hide();
+                       location.reload(true);
 
                    });
     };

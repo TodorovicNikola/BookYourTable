@@ -32,7 +32,7 @@ namespace BookYourTable.Controllers
             }
             else
             {
-                return RedirectToAction("Single", "Restaurant", new { restaurantID = user.RestaurantID });
+                return RedirectToAction("Single", "Restaurant");
             }
             
         }
