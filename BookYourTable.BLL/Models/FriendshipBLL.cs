@@ -15,6 +15,9 @@ namespace BookYourTable.BLL.Models
         //true - are friends; false - rejected; null - waiting for response
         public bool? Confirmed { get; set; }
 
+        public UserBLL GuestSender { get; set; }
+        public UserBLL GuestReciever { get; set; }
+
         public FriendshipBLL() { }
 
         public FriendshipBLL(Friendship friendship)
@@ -22,6 +25,9 @@ namespace BookYourTable.BLL.Models
             GuestSenderID = friendship.GuestSenderID;
             GuestRecieverID = friendship.GuestRecieverID;
             Confirmed = friendship.Confirmed;
+
+            GuestSender = new UserBLL(friendship.GuestSender, "friendship");
+            GuestReciever = new UserBLL(friendship.GuestReciever, "friendship");
         }
     }
 }

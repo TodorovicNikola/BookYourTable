@@ -52,11 +52,13 @@
     <Compile Include="Handlers\GuestHandlerDAL.cs" />
     <Compile Include="Handlers\LoginHandlerDAL.cs" />
     <Compile Include="Handlers\MenuItemHandlerDAL.cs" />
+    <Compile Include="Handlers\RateHandlerDAL.cs" />
     <Compile Include="Handlers\RegisterHandlerDAL.cs" />
     <Compile Include="Handlers\RestaurantHandlerDAL.cs" />
-    <Compile Include="Migrations\201602180727289_init.cs" />
-    <Compile Include="Migrations\201602180727289_init.Designer.cs">
-      <DependentUpon>201602180727289_init.cs</DependentUpon>
+    <Compile Include="Handlers\SeedHandler.cs" />
+    <Compile Include="Migrations\201602231953132_init.cs" />
+    <Compile Include="Migrations\201602231953132_init.Designer.cs">
+      <DependentUpon>201602231953132_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Friendship.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Models\Invitation.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\ReservationRealization.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\RestaurantManager.cs" />
     <Compile Include="Models\SystemManager.cs" />
@@ -78,8 +81,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602180727289_init.resx">
-      <DependentUpon>201602180727289_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602231953132_init.resx">
+      <DependentUpon>201602231953132_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

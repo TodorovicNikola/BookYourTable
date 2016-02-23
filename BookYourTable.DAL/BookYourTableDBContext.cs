@@ -26,6 +26,8 @@ namespace BookYourTable.DAL
         public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<Friendship> Friendships { get; set; }
+        public virtual DbSet<ReservationRealization> ReservationRealizations { get; set; }
+        public virtual DbSet<Invitation> Invitations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

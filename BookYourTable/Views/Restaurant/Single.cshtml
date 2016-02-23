@@ -16,14 +16,17 @@
 </head>
 <h2 style="text-transform: uppercase;">@Model.Name</h2>
 
-<input type="hidden" value="@Model.RestaurantID" id="restaurantID" />
-
 <img src="~/Content/Images/restaurant_default.jpg" alt="Poster" style="margin-left:20px ; margin-top:10px ; float:left ; width:450px ; border : 2px solid gray ;" />
 <div style="float : left;  margin-top:10px ; margin-left:40px">
     <p id="address" style="font-size:24px; position:relative; top:10px">Address: @Model.Address</p>
     <p id="description" style="font-size:24px; position:relative; top:10px;">Description: @Model.Description </p>
+    @if (@ViewData["AverageRatingOverall"] != null)
+    {
+        <p>Average Grade: @ViewData["AverageRatingOverall"]</p>
+        <p>Friends Grade: @ViewData["AverageRatingUserAndFriends"]</p>
+    }
 
-    <p style="position:relative; top: 168px; left:3px">
+    <p style="position:relative; top: 100px; left:3px">
         <a class="btn btn-primary" href="@Url.Action("../MenuItem/Index", new { restaurantID = Model.RestaurantID })">Menu Items</a>
         @if (user.Discriminator.Equals("SystemManager"))
         {
@@ -101,10 +104,10 @@ else
 
 
 <table class="grid">
-    @for (int i = 0; i < Model.TablesMatrixWidth; i++)
+    @for (int i = 0; i < Model.TablesMatrixHeight; i++)
     {
         <tr>
-            @for (int j = 0; j < Model.TablesMatrixHeight; j++)
+            @for (int j = 0; j < Model.TablesMatrixWidth; j++)
             {
                 int? n = i * Model.TablesMatrixWidth + j;
 

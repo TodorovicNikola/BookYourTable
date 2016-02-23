@@ -175,18 +175,45 @@ div.guest div.guest-right p:last-child{
 
 .grid td {
     cursor:pointer;
+    border:1px dotted #ccc;
+    text-align:center;
+    font-family:sans-serif; font-size:16px
+}
+
+.grid td.clicked {
+    background-color:cadetblue;
+}
+
+.grid td.cell {
+    width:58px;
+    height:58px;
+}
+
+.gridBook { margin:1em auto; border-collapse:collapse }
+
+.gridBook td {
     width:30px; height:30px;
     border:1px dotted #ccc;
     text-align:center;
     font-family:sans-serif; font-size:16px
 }
-.grid td.clicked {
-    background-color:lightseagreen;
+
+.gridBook td#clicked {
+    background-color:darkolivegreen;
 }
 
-td.cell {
+.gridBook td.cell {
     width:58px;
     height:58px;
+}
+
+.gridBook td.available{
+    background-color:lightseagreen;
+    cursor:pointer;
+}
+
+.gridBook td.notAvailable{
+    background-color:lightcoral;
 }
 
 a.btn-configure{

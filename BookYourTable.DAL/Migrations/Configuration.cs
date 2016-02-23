@@ -50,12 +50,12 @@ namespace BookYourTable.DAL.Migrations
                 );
 
             context.Restaurants.AddOrUpdate(
-                new Restaurant { Name = "NIRVANA", Description = "DOMACA KUHINJA", Address = "Banijska 5, Subotica", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = true },
-                new Restaurant { Name = "BOSS", Description = "SVE VRSTE KUHINJA", Address = "Aleja Marsala Tita 8, Subotica", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = true },
-                new Restaurant { Name = "CRNA MACA", Description = "ITALIJANSA KUHINJA", Address = "Laze Teleckog 15, Novi Sad", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = true },
-                new Restaurant { Name = "SNAILS", Description = "FRANCUSKA KUHINJA", Address = "Knez Mihajlova 18, Beograd", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = true },
-                new Restaurant { Name = "DVA STAPICA", Description = "KINESKA KUHINJA", Address = "Bulevar Cara Lazara 58, Novi Sad", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = true },
-                new Restaurant { Name = "PIZZA", Description = "ITALIJANSKA KUHINJA", Address = "Ilirska 5/a, Subotica", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = true }
+                new Restaurant { Name = "NIRVANA", Description = "DOMACA KUHINJA", Address = "Banijska 5, Subotica", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = false },
+                new Restaurant { Name = "BOSS", Description = "SVE VRSTE KUHINJA", Address = "Aleja Marsala Tita 8, Subotica", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = false },
+                new Restaurant { Name = "CRNA MACA", Description = "ITALIJANSA KUHINJA", Address = "Laze Teleckog 15, Novi Sad", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = false },
+                new Restaurant { Name = "SNAILS", Description = "FRANCUSKA KUHINJA", Address = "Knez Mihajlova 18, Beograd", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = false },
+                new Restaurant { Name = "DVA STAPICA", Description = "KINESKA KUHINJA", Address = "Bulevar Cara Lazara 58, Novi Sad", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = false },
+                new Restaurant { Name = "PIZZA", Description = "ITALIJANSKA KUHINJA", Address = "Ilirska 5/a, Subotica", TablesMatrixHeight = null, TablesMatrixWidth = null, Configured = false }
                 );
 
             passwordBytes = System.Text.Encoding.UTF8.GetBytes("nirvana");

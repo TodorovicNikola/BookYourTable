@@ -29,6 +29,6 @@ namespace BookYourTable.DAL.Models
         [ForeignKey("RestaurantID")]
         public virtual Restaurant Restaurant { get; set; }
 
-        public virtual ICollection<Reservation> Reservations { get; set; }
+        public ICollection<ReservationRealization> ReservationRealizations { get; set; }
     }
 }

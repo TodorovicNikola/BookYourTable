@@ -1,0 +1,65 @@
+﻿@using BookYourTable.BLL.Models;
+
+@{
+    ViewBag.Title = "SuccessfulBooking";
+}
+
+@{ UserBLL user = (UserBLL)Session["user"]; }
+<head>
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <script src="~/Scripts/InviteFriends.js"></script>
+
+</head>
+
+
+<h2>Invite Friends</h2>
+
+<form class="form-inline" style="position :relative; top: -47px; float:right;" action="#" method="post">
+    <fieldset>
+        <div class="form-group">
+            <a onclick="finishInviting()" class="btn btn-success" style="position:relative; left:0px;top:5px">Finish Inviting</a>
+        </div>
+    </fieldset>
+</form>
+
+<div style="clear:both"></div>
+<div class="guests">
+    <div></div>
+    @foreach (var item in user.SentFriendshipRequests)
+            {
+                if (item.Confirmed == true)
+                {
+            <div class="guest" id="@item.GuestReciever.UserID">
+                <div class="guest-left">
+                        <img class="image" src="~/Content/Images/guest_default.png" />
+                </div>
+                <div class="guest-right">
+                    <h3 style="text-transform: uppercase;">@item.GuestReciever.FirstName @item.GuestReciever.LastName</h3>
+                    <p style="position:relative; top:60px">E-Mail: @item.GuestReciever.E_Mail</p>
+                    <a onclick="inviteFriend(@item.GuestReciever.UserID)" class="btn btn-info" style="position:relative; left:240px;top:5px">Invite Friend</a>
+                </div>
+            </div>
+        }
+    }
+
+
+    @foreach (var item in user.RecievedFriendshipRequests)
+            {
+                if (item.Confirmed == true)
+                {
+            <div class="guest" id="@item.GuestSender.UserID">
+                <div class="guest-left">
+                        <img class="image" src="~/Content/Images/guest_default.png" />
+                </div>
+                <div class="guest-right">
+                    <h3 style="text-transform: uppercase;">@item.GuestSender.FirstName @item.GuestSender.LastName</h3>
+                    <p style="position:relative; top:60px">E-Mail: @item.GuestSender.E_Mail</p>
+                    <a onclick="inviteFriend(@item.GuestSender.UserID)" class="btn btn-info" style="position:relative; left:240px;top:5px">Invite Friend</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div style="clear:both"></div>
+<input type="hidden" value="@ViewData["ReservationID"]" id="reservationID" />

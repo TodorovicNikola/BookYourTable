@@ -13,7 +13,7 @@ namespace BookYourTable.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201602180727289_init"; }
+            get { return "201602231953132_init"; }
         }
         
         string IMigrationMetadata.Source

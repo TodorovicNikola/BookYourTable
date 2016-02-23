@@ -1,0 +1,194 @@
+﻿@model BookYourTable.BLL.Models.RestaurantBLL
+@using BookYourTable.BLL.Models;
+@using System.Globalization;
+@using System.Threading;
+
+@{
+    ViewBag.Title = "BookTable";
+    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+}
+
+<head>
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <script src="~/Scripts/BookTable.js"></script>
+</head>
+
+<h2>Book Your Table - @Model.Name</h2>
+
+<img src="~/Content/Images/restaurant_default.jpg" alt="Poster" style="margin-left:20px ; margin-top:10px ; float:left ; width:450px ; border : 2px solid gray ;" />
+<div style="float : left;  margin-top:10px ; margin-left:40px">
+    <p id="address" style="font-size:24px; position:relative; top:10px">Address: @Model.Address</p>
+    <p id="description" style="font-size:24px; position:relative; top:10px;">Description: @Model.Description </p>
+
+    <p style="position:relative; top: 168px; left:3px">
+        <a class="btn btn-primary" href="@Url.Action("../MenuItem/Index", new { restaurantID = Model.RestaurantID })">Menu Items</a>
+    </p>
+</div>
+<div class="clearDiv" style="clear:both"></div>
+<br />
+<hr />
+<form class="form-inline" style="position :relative; top: 0px; float:left;" action="../Restaurant/BookTable" method="post">
+    <fieldset>
+        <div class="form-group" style="position:relative;">
+            @if (ViewData["date"] == null)
+            {
+                <label class="control-label" for="select">Date:</label>
+                <select class="form-control" name="date" style="position:relative; left:5px; top:1px">
+                    <option>@DateTime.Today.ToShortDateString()</option>
+                    <option>@DateTime.Now.AddDays(1).ToShortDateString()</option>
+                    <option>@DateTime.Now.AddDays(2).ToShortDateString()</option>
+                    <option>@DateTime.Now.AddDays(3).ToShortDateString()</option>
+                </select>
+
+                <label class="control-label" for="select" style="position:relative; left:13px;">Time:</label>
+                <select class="form-control" style="position:relative; left:18px; top:1px" name="time">
+                    @for (int i = 9; i < 24; i++)
+                    {
+                        if (i == 19)
+                        {
+                            <option selected>@i:00 </option>
+                        }
+                        else
+                        {
+                            <option>@i:00 </option>
+                        }
+                    }
+                </select>
+                <label class="control-label" style="position:relative; left:26px">Duration (h):</label>
+                <input class="form-control" type="number" name="duration" min="1" max="4" value="1" style="position:relative; top:1px; left:28px">
+            }
+            else
+            {
+                <label class="control-label" for="select">Date:</label>
+                <select class="form-control" name="date" style="position:relative; left:5px; top:1px">
+                    @if (@DateTime.Today.ToShortDateString().Equals(ViewData["date"]))
+                    {
+                        <option selected>@DateTime.Today.ToShortDateString()</option>
+                    }
+                    else
+                    {
+                        <option>@DateTime.Today.ToShortDateString()</option>
+                    }
+
+
+
+                    @if (@DateTime.Now.AddDays(1).ToShortDateString().Equals(ViewData["date"]))
+                    {
+                        <option selected>@DateTime.Now.AddDays(1).ToShortDateString()</option>
+                    }
+                    else
+                    {
+                        <option>@DateTime.Now.AddDays(1).ToShortDateString()</option>
+                    }
+
+                    @if (@DateTime.Now.AddDays(2).ToShortDateString().Equals(ViewData["date"]))
+                    {
+                        <option selected>@DateTime.Now.AddDays(2).ToShortDateString()</option>
+                    }
+                    else
+                    {
+                        <option>@DateTime.Now.AddDays(2).ToShortDateString()</option>
+                    }
+
+                    @if (@DateTime.Now.AddDays(3).ToShortDateString().Equals(ViewData["date"]))
+                    {
+                        <option selected>@DateTime.Now.AddDays(3).ToShortDateString()</option>
+                    }
+                    else
+                    {
+                        <option>@DateTime.Now.AddDays(3).ToShortDateString()</option>
+                    }
+                </select>
+
+                <label class="control-label" for="select" style="position:relative; left:13px;">Time:</label>
+                <select class="form-control" style="position:relative; left:18px; top:1px" name="time">
+                    @for (int i = 9; i < 24; i++)
+                    {
+                        if (ViewData["time"].Equals(i + ":00"))
+                        {
+                            <option selected>@i:00 </option>
+                        }
+                        else
+                        {
+                            <option>@i:00 </option>
+                        }
+
+                    }
+                </select>
+
+                <input class="form-control" type="number" name="duration" min="1" max="4" value=@ViewData["duration"] style="position:relative; top:1px; left:28px">
+            }       
+            <button type="submit" class="btn btn-primary" style="position:relative; left:38px; width:110px">Show</button>     
+            <input type="hidden" id="restaurantID" name="restaurantID" value="@Model.RestaurantID" />
+        </div>
+    </fieldset>
+</form>
+<div class="form-group" style="float:right">
+    <a class="btn btn-info" onclick="bookTable()">Confirm Booking</a>
+</div>
+
+<div class="clearDiv" style="clear:both"></div>
+
+<table class="gridBook" id="tablesTable">
+    @for (int i = 0; i < Model.TablesMatrixHeight; i++)
+    {
+        <tr>
+            @for (int j = 0; j < Model.TablesMatrixWidth; j++)
+            {
+                int? n = i * Model.TablesMatrixWidth + j;
+
+                if (Model.Tables.Any(c => c.CellNumber == n))
+                {
+
+                    foreach (TableBLL t in Model.Tables.ToList())
+                    {
+                        if (t.CellNumber == n)
+                        {
+                            bool available = true;
+
+                            foreach (ReservationRealizationBLL r in t.ReservationRealizationBLL)
+                            {
+                                if (r.ReservationID != null)
+                                {
+                                    available = false;
+                                }
+
+                            }
+
+                            if (available)
+                            {
+                                <td class="cell available" onclick="tableClicked(this)"></td>
+                            }
+                            else
+                            {
+                                <td class="cell notAvailable"></td>
+                            }
+
+                            break;
+                        }
+
+                    }
+                }
+                else
+                {
+                    <td class="cell"></td>
+                }
+            }           
+        </tr>
+    }
+</table>
+
+@if (ViewData["date"] == null)
+{
+    <input type="hidden" value="@DateTime.Today.ToShortDateString()" id="date"/>
+    <input type="hidden" value="19:00" id="time"/>
+    <input type="hidden" value="1" id="duration"/>
+}
+else
+{
+    <input type="hidden" value="@ViewData["date"]" id="date" />
+    <input type="hidden" value="@ViewData["time"]" id="time" />
+    <input type="hidden" value="@ViewData["duration"]" id="duration" />
+}
+

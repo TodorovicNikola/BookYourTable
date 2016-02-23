@@ -14,29 +14,20 @@ namespace BookYourTable.DAL.Models
         [Column(Order = 0)]
         public int ReservationID { get; set; }
 
-        [Key]
-        [ForeignKey("Table")]
-        [Column(Order = 1)]
-        public int TableID { get; set; }
-
-        [Key]
-        [ForeignKey("Table")]
-        [Column(Order = 2)]
-        public int RestaurantID { get; set; }
-
-        [Required]
         [ForeignKey("Guest")]
         public int GuestID { get; set; }
 
         [Required]
-        public DateTime DateAndTime { get; set; }
+        [ForeignKey("Restaurant")]
+        public int RestaurantID { get; set; }
 
         [Required]
-        public float Period { get; set; }
+        public DateTime ReservationDate { get; set; }
+
 
         public virtual Guest Guest { get; set; }
-        public virtual Table Table { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
         public virtual ICollection<Invitation> Invitations { get; set; }
-
+        public virtual ICollection<ReservationRealization> ReservationRealizations { get; set; }
     }
 }

@@ -14,13 +14,72 @@
     <p id="eMail" style="font-size:24px; position:relative; top:10px">First Name: @Model.FirstName</p>
     <p id="eMail" style="font-size:24px; position:relative; top:10px">Last Name: @Model.LastName</p>
     <p id="eMail" style="font-size:24px; position:relative; top:10px">E-Mail: @Model.E_Mail</p>
-
+@if (user.UserID.Equals(Model.UserID))
+{
     <p style="position:relative; top: 70px; left:3px">
-        @if (user.UserID.Equals(Model.UserID))
-        {
-            <a class="btn btn-primary" href="@Url.Action("../Guest/EditGuest")">Edit Profile</a>
-        }
+        <a class="btn btn-primary" href="@Url.Action("../Guest/EditGuest")">Edit Profile</a>
     </p>
+}
 </div>
-<div class="clear_div" style="clear:both"></div>
+<div style="clear:both"></div>
+
+@if (user.UserID.Equals(Model.UserID) && user.Discriminator.Equals("Guest"))
+{
+    <hr style="" />
+    <div style="clear:both"></div>
+
+    <form class="form-inline" style="position :relative; top:-5px; float:right;" action="../Guest/Index" method="post">
+        <div class="form-group">
+            <a href="@Url.Action("../Guest/Index" )" class="btn btn-info" style="position:relative; left:-4px;top:-10px">Find Friend</a>
+        </div>
+        <div class="form-group">
+            <input type="search" name="searchInput" class="form-control" id="inputSearch" placeholder="Search..." style="margin-bottom:20px; width:200px" />
+            <input type="image" id="search-button" src="~/Content/Images/search_button.png" alt="Submit" width="30" height="30" style="position: relative; top: 0px">
+        </div>
+    </form>
+    <div style="clear:both"></div>
+        <div class="guests">
+            <div></div>
+            @foreach (var item in user.SentFriendshipRequests)
+            {
+                if (item.Confirmed == true)
+                {
+                    <div class="guest" id="@item.GuestReciever.UserID">
+                        <div class="guest-left">
+                            <a href="@Url.Action("../Guest/Single", new { userID = item.GuestReciever.UserID })">
+                                <img class="image" src="~/Content/Images/guest_default.png" />
+                            </a>
+                        </div>
+                        <div class="guest-right">
+                            <h3 style="text-transform: uppercase;">@Html.ActionLink(item.GuestReciever.FirstName + " " + item.GuestReciever.LastName, "../Guest/Single", new { userID = item.GuestReciever.UserID })</h3>
+                            <p style="position:relative; top:60px">E-Mail: @item.GuestReciever.E_Mail</p>
+                            <a href="@Url.Action("../Guest/RemoveFriend", new { removeFriendSent = item.GuestReciever.UserID })" class="btn btn-warning" style="position:relative; left:240px;top:5px">Remove Friend</a>
+                        </div>
+                    </div>
+                }
+            }
+
+
+            @foreach (var item in user.RecievedFriendshipRequests)
+            {
+                if (item.Confirmed == true)
+                {
+                    <div class="guest" id="@item.GuestSender.UserID">
+                        <div class="guest-left">
+                            <a href="@Url.Action("../Guest/Single", new { userID = item.GuestSender.UserID })">
+                                <img class="image" src="~/Content/Images/guest_default.png" />
+                            </a>
+                        </div>
+                        <div class="guest-right">
+                            <h3 style="text-transform: uppercase;">@Html.ActionLink(item.GuestSender.FirstName + " " + item.GuestSender.LastName, "../Guest/Single", new { userID = item.GuestSender.UserID })</h3>
+                            <p style="position:relative; top:60px">E-Mail: @item.GuestSender.E_Mail</p>
+                            <a href="@Url.Action("../Guest/RemoveFriend", new { removeFriendRecieved = item.GuestSender.UserID })" class="btn btn-warning" style="position:relative; left:240px;top:5px">Remove Friend</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        }
+
+        <div class="clear_div" style="clear:both"></div>
 

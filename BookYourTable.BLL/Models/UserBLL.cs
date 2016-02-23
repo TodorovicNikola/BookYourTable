@@ -46,10 +46,19 @@ namespace BookYourTable.BLL.Models
 
                 foreach (Friendship friendship in guest.RecievedFriendshipRequests)
                 {
-                    SentFriendshipRequests.Add(new FriendshipBLL(friendship));
+                    RecievedFriendshipRequests.Add(new FriendshipBLL(friendship));
                 }
             }
+        }
 
+        public UserBLL(Guest guest, String forFriendship)
+        {
+            UserID = guest.UserID;
+            E_Mail = guest.E_Mail;
+            Password = guest.Password;
+            FirstName = guest.FirstName;
+            LastName = guest.LastName;
+            Address = guest.Address;
         }
 
         public UserBLL(SystemManager systemManager)
@@ -71,6 +80,7 @@ namespace BookYourTable.BLL.Models
             LastName = restaurantManager.LastName;
             RestaurantID = restaurantManager.RestaurantID;
             Discriminator = typeof(RestaurantManager).Name;
+            Restaurant = new RestaurantBLL(restaurantManager.Restaurant);
         }
 
         public UserBLL(UserDBReplica user)

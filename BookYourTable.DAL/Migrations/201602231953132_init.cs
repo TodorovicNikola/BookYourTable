@@ -46,34 +46,47 @@ namespace BookYourTable.DAL.Migrations
                 c => new
                     {
                         GuestID = c.Int(nullable: false),
-                        RestaurantID = c.Int(nullable: false),
-                        TableID = c.Int(nullable: false),
                         ReservationID = c.Int(nullable: false),
                         Accepted = c.Boolean(),
                         Grade = c.Int(),
                     })
-                .PrimaryKey(t => new { t.GuestID, t.RestaurantID, t.TableID, t.ReservationID })
+                .PrimaryKey(t => new { t.GuestID, t.ReservationID })
                 .ForeignKey("dbo.Users", t => t.GuestID)
-                .ForeignKey("dbo.Reservations", t => new { t.RestaurantID, t.TableID, t.ReservationID })
+                .ForeignKey("dbo.Reservations", t => t.ReservationID)
                 .Index(t => t.GuestID)
-                .Index(t => new { t.RestaurantID, t.TableID, t.ReservationID });
+                .Index(t => t.ReservationID);
             
             CreateTable(
                 "dbo.Reservations",
                 c => new
                     {
-                        ReservationID = c.Int(nullable: false),
+                        ReservationID = c.Int(nullable: false, identity: true),
+                        GuestID = c.Int(nullable: false),
+                        RestaurantID = c.Int(nullable: false),
+                        ReservationDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ReservationID)
+                .ForeignKey("dbo.Users", t => t.GuestID)
+                .ForeignKey("dbo.Restaurants", t => t.RestaurantID)
+                .Index(t => t.GuestID)
+                .Index(t => t.RestaurantID);
+            
+            CreateTable(
+                "dbo.ReservationRealizations",
+                c => new
+                    {
+                        Date = c.DateTime(nullable: false),
+                        Time = c.Decimal(nullable: false, precision: 18, scale: 2),
                         TableID = c.Int(nullable: false),
                         RestaurantID = c.Int(nullable: false),
-                        GuestID = c.Int(nullable: false),
-                        DateAndTime = c.DateTime(nullable: false),
-                        Period = c.Single(nullable: false),
+                        ReservationID = c.Int(),
+                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
-                .PrimaryKey(t => new { t.ReservationID, t.TableID, t.RestaurantID })
-                .ForeignKey("dbo.Users", t => t.GuestID)
+                .PrimaryKey(t => new { t.Date, t.Time, t.TableID, t.RestaurantID })
+                .ForeignKey("dbo.Reservations", t => t.ReservationID)
                 .ForeignKey("dbo.Tables", t => new { t.TableID, t.RestaurantID })
                 .Index(t => new { t.TableID, t.RestaurantID })
-                .Index(t => t.GuestID);
+                .Index(t => t.ReservationID);
             
             CreateTable(
                 "dbo.Tables",
@@ -125,18 +138,22 @@ namespace BookYourTable.DAL.Migrations
         {
             DropForeignKey("dbo.Friendships", "GuestSenderID", "dbo.Users");
             DropForeignKey("dbo.Friendships", "GuestRecieverID", "dbo.Users");
-            DropForeignKey("dbo.Invitations", new[] { "RestaurantID", "TableID", "ReservationID" }, "dbo.Reservations");
-            DropForeignKey("dbo.Reservations", new[] { "TableID", "RestaurantID" }, "dbo.Tables");
+            DropForeignKey("dbo.Invitations", "ReservationID", "dbo.Reservations");
+            DropForeignKey("dbo.Reservations", "RestaurantID", "dbo.Restaurants");
+            DropForeignKey("dbo.ReservationRealizations", new[] { "TableID", "RestaurantID" }, "dbo.Tables");
             DropForeignKey("dbo.Tables", "RestaurantID", "dbo.Restaurants");
             DropForeignKey("dbo.Users", "RestaurantID", "dbo.Restaurants");
             DropForeignKey("dbo.MenuItems", "RestaurantID", "dbo.Restaurants");
+            DropForeignKey("dbo.ReservationRealizations", "ReservationID", "dbo.Reservations");
             DropForeignKey("dbo.Reservations", "GuestID", "dbo.Users");
             DropForeignKey("dbo.Invitations", "GuestID", "dbo.Users");
             DropIndex("dbo.MenuItems", new[] { "RestaurantID" });
             DropIndex("dbo.Tables", new[] { "RestaurantID" });
+            DropIndex("dbo.ReservationRealizations", new[] { "ReservationID" });
+            DropIndex("dbo.ReservationRealizations", new[] { "TableID", "RestaurantID" });
+            DropIndex("dbo.Reservations", new[] { "RestaurantID" });
             DropIndex("dbo.Reservations", new[] { "GuestID" });
-            DropIndex("dbo.Reservations", new[] { "TableID", "RestaurantID" });
-            DropIndex("dbo.Invitations", new[] { "RestaurantID", "TableID", "ReservationID" });
+            DropIndex("dbo.Invitations", new[] { "ReservationID" });
             DropIndex("dbo.Invitations", new[] { "GuestID" });
             DropIndex("dbo.Users", new[] { "RestaurantID" });
             DropIndex("dbo.Users", new[] { "E_Mail" });
@@ -145,6 +162,7 @@ namespace BookYourTable.DAL.Migrations
             DropTable("dbo.MenuItems");
             DropTable("dbo.Restaurants");
             DropTable("dbo.Tables");
+            DropTable("dbo.ReservationRealizations");
             DropTable("dbo.Reservations");
             DropTable("dbo.Invitations");
             DropTable("dbo.Users");

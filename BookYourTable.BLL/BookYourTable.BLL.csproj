@@ -45,12 +45,15 @@
     <Compile Include="Handlers\GuestHandlerBLL.cs" />
     <Compile Include="Handlers\LoginHandlerBLL.cs" />
     <Compile Include="Handlers\MenuItemHandlerBLL.cs" />
+    <Compile Include="Handlers\RateHandlerBLL.cs" />
     <Compile Include="Handlers\RegisterHandlerBLL.cs" />
     <Compile Include="Handlers\RestaurantHandlerBLL.cs" />
+    <Compile Include="Handlers\SeedHandlerBLL.cs" />
     <Compile Include="Models\FriendshipBLL.cs" />
     <Compile Include="Models\InvitationBLL.cs" />
     <Compile Include="Models\MenuItemBLL.cs" />
     <Compile Include="Models\ReservationBLL.cs" />
+    <Compile Include="Models\ReservationRealizationBLL.cs" />
     <Compile Include="Models\RestaurantBLL.cs" />
     <Compile Include="Models\TableBLL.cs" />
     <Compile Include="Models\UserBLL.cs" />

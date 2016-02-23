@@ -17,9 +17,9 @@ namespace BookYourTable.DAL.Models
 
         public bool ConfirmedRegistration { get; set; }
 
-        public virtual ICollection<Reservation> Reservations { get; set; }
-        public virtual ICollection<Invitation> Invitations { get; set; }
-        public virtual ICollection<Friendship> SentFriendshipRequests { get; set; }
-        public virtual ICollection<Friendship> RecievedFriendshipRequests { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
+        public ICollection<Invitation> Invitations { get; set; }
+        public ICollection<Friendship> SentFriendshipRequests { get; set; }
+        public ICollection<Friendship> RecievedFriendshipRequests { get; set; }
     }
 }

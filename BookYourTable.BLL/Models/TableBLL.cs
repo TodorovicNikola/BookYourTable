@@ -17,6 +17,8 @@ namespace BookYourTable.BLL.Models
 
         public String Description { get; set; }
 
+        public List<ReservationRealizationBLL> ReservationRealizationBLL;
+
         public TableBLL() { }
 
         public TableBLL(Table table)
@@ -26,6 +28,16 @@ namespace BookYourTable.BLL.Models
             Capacity = table.Capacity;
             CellNumber = table.CellNumber;
             Description = table.Description;
+
+            ReservationRealizationBLL = new List<ReservationRealizationBLL>();
+            if(table.ReservationRealizations != null)
+            {
+                foreach (ReservationRealization r in table.ReservationRealizations)
+                {
+                    ReservationRealizationBLL.Add(new ReservationRealizationBLL(r));
+                }
+            }
+
         }
     }
 }

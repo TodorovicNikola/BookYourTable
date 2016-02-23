@@ -32,8 +32,9 @@ namespace BookYourTable.DAL.Models
         public int? TablesMatrixWidth { get; set; }
         public int? TablesMatrixHeight { get; set; }
         
-        public virtual ICollection<RestaurantManager> RestaurantManagers { get; set; }
-        public virtual ICollection<MenuItem> MenuItems { get; set; }
-        public virtual ICollection<Table> Tables { get; set; }
+        public ICollection<RestaurantManager> RestaurantManagers { get; set; }
+        public ICollection<MenuItem> MenuItems { get; set; }
+        public ICollection<Table> Tables { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
     }
 }

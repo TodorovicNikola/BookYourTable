@@ -22,18 +22,27 @@
                     </div>
                 </div>
             }
-
+            <div class="form-group">
+                <ul class="nav nav-pills" style="position:relative; top:-9px; right:4px; height:40px">
+                    <li class="dropdown active">
+                        <a class="dropdown-toggle" aria-expanded="false" href="#" data-toggle="dropdown">
+                            Sort By <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("../Restaurant/Index", new { sortBy = "name" })">Name</a></li>
+                            <li><a href="@Url.Action("../Restaurant/Index", new { sortBy = "description" })">Description</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
             <div class="form-group">
 
                 @if (user.Discriminator.Equals("SystemManager"))
                 {
-                    <a class="btn btn-primary" style="position:relative; top:-11px; right:5px"  href="../Register/RegisterRestaurant">Add Restaurant</a>
+                    <a class="btn btn-primary" style="position:relative; top:-10px; right:5px"  href="../Register/RegisterRestaurant">Add Restaurant</a>
                 }
 
-                
-                <input type="search" name="inputSearch" class="form-control" id="inputSearch" placeholder="Search..." style="margin-bottom:20px; width:200px" />
-                <input type="image" id="search-button" src="~/Content/Images/search_button.png" alt="Submit" width="30" height="30" style="position: relative; top: 0px">
             </div>
         </fieldset>
     </form>

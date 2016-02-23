@@ -18,16 +18,6 @@ namespace BookYourTable.DAL.Models
         [Key]
         [ForeignKey("Reservation")]
         [Column(Order = 1)]
-        public int RestaurantID { get; set; }
-
-        [Key]
-        [ForeignKey("Reservation")]
-        [Column(Order = 2)]
-        public int TableID { get; set; }
-
-        [Key]
-        [ForeignKey("Reservation")]
-        [Column(Order = 3)]
         public int ReservationID { get; set; }
 
         public bool? Accepted { get; set; }
